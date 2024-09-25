@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from'react';
 
-function App() {
+
+
+function App(props) {
+
+  const fecha = new Date();
+  const estilo = {
+    backgroundColor: 'lightblue',
+    color: props.c,
+    fontSize: props.t,
+    padding: '5px',
+    borderRadius: '30px',
+    margin: '1px',
+    textAlign: 'center', // add this to center the text
+    fontFamily: 'Microsoft Sans Serif' // add this to change the font    
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+        <h1 style={estilo}>Hola Mundo!</h1>
+        <p>  Pagina de Deyvi!</p>
+        <p>Fecha : {fecha.toLocaleDateString()} </p>
+        <p>Hora : {fecha.toLocaleTimeString()} </p>
+    </>
+      );
 }
 
 export default App;
