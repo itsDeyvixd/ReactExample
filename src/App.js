@@ -61,7 +61,11 @@ function App(props) {
       <ul>
         {info.map((item, index) => (
           <li key={index}>
-            ID: {item.id} - Name: {item.name} - Email: {item.email} - Body: {item.body}{" "}
+            <h3>ID: {item.id} </h3>
+            <p>Post ID: {item.postId}</p>
+            <p>Name: {item.name}</p>
+            <p>Email: {item.email}</p>
+            <p>Body: {item.body}</p>
           </li>
         ))}
       </ul>
