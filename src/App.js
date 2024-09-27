@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Cmenu from "./componentes/Cmenu.js";
+import Comp1 from "./componentes/Comp1.js";
 
 function App(props) {
   const [cont, setCont] = useState(0);
-  const [info, SetInfo] = useState([]);
+  const [oe, setOE] = useState(0);
+  const [info, SetInfo] = useState([
+    {
+      id: 1,
+      postId: 2,
+      name: "Fullstack",
+      email: "fs@fs.com",
+      body: "este es el body",
+    },
+  ]);
+  const pID = useRef(1);
   const fecha = new Date();
   const estilo = {
     backgroundColor: "lightblue",
@@ -14,6 +25,22 @@ function App(props) {
     margin: "1px",
     textAlign: "center", // add this to center the text
     fontFamily: "Microsoft Sans Serif", // add this to change the font
+  };
+  let buscarId = () => {
+    console.log("holaaaa: " + pID.current.value);
+
+    info.forEach((d) => {
+      if (d.id === parseInt(pID.current.value)) {
+        console.log("encontreeee "+JSON.stringify(d));
+        setOE(d);
+      }
+      else {
+      }
+    })
+  };
+
+  let msgHijo = (msg) => {
+    console.log("El msg del hijo es:" + msg);
   };
   let getData = () => {
     try {
@@ -72,9 +99,23 @@ function App(props) {
       </ul>
 
       <div>
-        <Cmenu/>
+        <Cmenu />
+      </div>
+      <div>
+        <input type="text" placeholder="Ingrese el id para buscar" ref={pID} />
+        <button
+          type="button"
+          onClick={() => {
+            buscarId();
+          }}
+        >
+          Buscar por ID
+        </button>
       </div>
 
+      <div>
+        <Comp1 color="green" bc="pink" obj={oe} msgXpapa={msgHijo} />
+      </div>
     </>
   );
 }
