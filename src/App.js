@@ -1,8 +1,11 @@
 import React, { useRef, useState } from "react";
 import Cmenu from "./componentes/Cmenu.js";
 import Comp1 from "./componentes/Comp1.js";
+import Comp2 from "./componentes/Comp2.js";
+import Comp3 from "./componentes/Comp3.js";
 
 function App(props) {
+  const [menu, setMenu] = useState("");
   const [cont, setCont] = useState(0);
   const [oe, setOE] = useState(0);
   const [info, SetInfo] = useState([
@@ -15,7 +18,6 @@ function App(props) {
     },
   ]);
   const pID = useRef(1);
-  const fecha = new Date();
   const estilo = {
     backgroundColor: "lightblue",
     color: props.c,
@@ -31,17 +33,22 @@ function App(props) {
 
     info.forEach((d) => {
       if (d.id === parseInt(pID.current.value)) {
-        console.log("encontreeee "+JSON.stringify(d));
+        console.log("encontreeee " + JSON.stringify(d));
         setOE(d);
+      } else {
       }
-      else {
-      }
-    })
+    });
   };
 
   let msgHijo = (msg) => {
-    console.log("El msg del hijo es:" + msg);
+    console.log("El msg del hijo es: " + msg);
   };
+
+  let option = (option) => {
+    console.log("la opcion es:" + option);
+    setMenu(option);
+  };
+
   let getData = () => {
     try {
       fetch("https://jsonplaceholder.typicode.com/posts/1/comments", {
@@ -69,10 +76,8 @@ function App(props) {
 
   return (
     <>
+    
       <h1 style={estilo}>Hola Mundo!</h1>
-      <p> Pagina de Deyvi!</p>
-      <p>Fecha : {fecha.toLocaleDateString()} </p>
-      <p>Hora : {fecha.toLocaleTimeString()} </p>
 
       <h3> Cont:{cont}</h3>
       <button type="button" onClick={() => setCont(cont + 1)}>
@@ -99,9 +104,6 @@ function App(props) {
       </ul>
 
       <div>
-        <Cmenu />
-      </div>
-      <div>
         <input type="text" placeholder="Ingrese el id para buscar" ref={pID} />
         <button
           type="button"
@@ -114,8 +116,23 @@ function App(props) {
       </div>
 
       <div>
-        <Comp1 color="green" bc="pink" obj={oe} msgXpapa={msgHijo} />
+        <Cmenu option={option} />
       </div>
+      {menu == "Comp1" && (
+        <div>
+          <Comp1 color="green" bc="pink" obj={oe} msgXpapa={msgHijo} />
+        </div>
+      )}
+      {menu == "Comp2" && (
+        <div>
+          <Comp2 />
+        </div>
+      )}
+      {menu == "Comp3" && (
+        <div>
+          <Comp3 />
+        </div>
+      )}
     </>
   );
 }
